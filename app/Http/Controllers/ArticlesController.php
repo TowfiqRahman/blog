@@ -50,11 +50,7 @@ class ArticlesController extends Controller
 
     public function update(Article $article){
 
-      $article->update(request()->validate([
-        'title' => 'required',
-        'excerpt' => 'required',
-        'body' => 'required'
-      ]));
+      $article->update($this->validateArticle());
 
       //$article = Article::find($id);
 
@@ -66,5 +62,12 @@ class ArticlesController extends Controller
       */
       return redirect('/articles/' . $article->id);
     }
-    
+
+    protected function validateArticle(){
+      return request()->validate([
+        'title' => 'required',
+        'excerpt' => 'required',
+        'body' => 'required'
+      ]);
+    }
 }
