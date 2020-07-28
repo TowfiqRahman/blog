@@ -60,7 +60,7 @@ class ArticlesController extends Controller
 
       $article->save();
       */
-      return redirect('/articles/' . $article->id);
+      return redirect(route('articles.show', $article));
     }
 
     protected function validateArticle(){
