@@ -14,7 +14,7 @@
     <div id="page" class="container">
       <h1 class="heading has-text-weight-bold is-size-4">New Article</h1>
 
-      <form method="POST" action="/laracast/blog/public/articles">
+      <form method="POST" action="/articles">
           @csrf
                 <div class="field">
                     <label class="label" for="title">Title</label>
@@ -59,6 +59,22 @@
                         <p class="help is-danger" >{{ $errors->first('body')}}</p>
                     @enderror
                 </div>
+
+                <div class="field">
+                    <label class="label" for="body">Tags</label>
+
+                    <div class="control">
+                        <select class="" name="tags[]" multiple>
+                          @foreach($tags as $tag)
+                              <option value="{{$tag->id}}">{{ $tag->name}}</option>
+                          @endforeach
+                        </select>
+                    </div>
+                    @error('tags')
+                        <p class="help is-danger" >{{ $errors->first('tags')}}</p>
+                    @enderror
+                </div>
+
                 <div class="field is-grouped">
                     <div class="control">
                         <button class="button is-link" type="submit">Submit</button>
